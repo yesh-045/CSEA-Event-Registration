@@ -38,7 +38,7 @@ const RegistrationForm = () => {
             teamMembers
         };
         try {
-            const response = await axios.post('http://localhost:3000/register', teamData);
+            const response = await axios.post('http://localhost:5000/register', teamData);
             console.log('Registration successful', response.data);
         } catch (error) {
             console.error('There was an error registering the team:', error);
