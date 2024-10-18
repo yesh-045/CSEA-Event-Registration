@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    background: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+}
+
+.shape {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    border-radius: 50%;
+    position: relative;
+    margin: 20px auto;
+}
+
+.text {
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    display: inline-block;
+    opacity: 0; /* Initially hidden */
+}
