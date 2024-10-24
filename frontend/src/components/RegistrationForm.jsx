@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Box, Button, TextField, Typography, Grid, Container, Paper } from '@mui/material';
 
 const RegistrationForm = () => {
     const [teamName, setTeamName] = useState('');
@@ -46,63 +47,105 @@ const RegistrationForm = () => {
     };
 
     return (
-        <div>
-            <h1>Team Registration</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Team Name:</label>
-                    <input type="text" value={teamName} onChange={handleTeamNameChange} required />
-                </div>
+        <Container maxWidth="md">
+            <Paper elevation={3} sx={{ padding: '2rem', marginTop: '2rem' }}>
+                <Typography variant="h4" gutterBottom align="center">
+                    Team Registration
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                label="Team Name"
+                                value={teamName}
+                                onChange={handleTeamNameChange}
+                                fullWidth
+                                required
+                                variant="outlined"
+                            />
+                        </Grid>
 
-                {teamMembers.map((member, index) => (
-                    <div key={index}>
-                        <h3>Team Member {index + 1}</h3>
-                        <div>
-                            <label>Student Name:</label>
-                            <input
-                                type="text"
-                                value={member.studentName}
-                                onChange={(e) => handleMemberChange(index, 'studentName', e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Department:</label>
-                            <input
-                                type="text"
-                                value={member.department}
-                                onChange={(e) => handleMemberChange(index, 'department', e.target.value)}
-                                required
-                            />
-                        </div>
-                        <div>
-                            <label>Year of Study (1 or 2):</label>
-                            <input
-                                type="number"
-                                value={member.yearOfStudy}
-                                onChange={(e) => handleMemberChange(index, 'yearOfStudy', e.target.value)}
-                                min="1"
-                                max="2"
-                                required
-                            />
-                        </div>
-                        {index > 1 && (
-                            <button type="button" onClick={() => removeMember(index)}>
-                                Remove Member
-                            </button>
+                        {teamMembers.map((member, index) => (
+                            <Grid container spacing={2} key={index} sx={{ marginBottom: '1rem' }}>
+                                <Grid item xs={12}>
+                                    <Typography variant="h6">
+                                        Team Member {index + 1}
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <TextField
+                                        label="Student Name"
+                                        value={member.studentName}
+                                        onChange={(e) => handleMemberChange(index, 'studentName', e.target.value)}
+                                        fullWidth
+                                        required
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={3}>
+                                    <TextField
+                                        label="Department"
+                                        value={member.department}
+                                        onChange={(e) => handleMemberChange(index, 'department', e.target.value)}
+                                        fullWidth
+                                        required
+                                        variant="outlined"
+                                    />
+                                </Grid>
+                                <Grid item xs={12} sm={3}>
+                                    <TextField
+                                        label="Year of Study"
+                                        value={member.yearOfStudy}
+                                        onChange={(e) => handleMemberChange(index, 'yearOfStudy', e.target.value)}
+                                        type="number"
+                                        InputProps={{ inputProps: { min: 1, max: 2 } }}
+                                        fullWidth
+                                        required
+                                        variant="outlined"
+                                    />
+                                </Grid>
+
+                                {index > 1 && (
+                                    <Grid item xs={12}>
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={() => removeMember(index)}
+                                            fullWidth
+                                        >
+                                            Remove Member
+                                        </Button>
+                                    </Grid>
+                                )}
+                            </Grid>
+                        ))}
+
+                        {teamMembers.length < 3 && (
+                            <Grid item xs={12}>
+                                <Button
+                                    variant="outlined"
+                                    onClick={addMember}
+                                    fullWidth
+                                >
+                                    Add Team Member
+                                </Button>
+                            </Grid>
                         )}
-                    </div>
-                ))}
 
-                {teamMembers.length < 3 && (
-                    <button type="button" onClick={addMember}>
-                        Add Team Member
-                    </button>
-                )}
-
-                <button type="submit">Register Team</button>
-            </form>
-        </div>
+                        <Grid item xs={12}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                            >
+                                Register Team
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Box>
+            </Paper>
+        </Container>
     );
 };
 
