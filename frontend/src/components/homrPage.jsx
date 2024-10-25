@@ -219,9 +219,9 @@ const HomePage = () => {
           </h2>
           <p className="text-gray-200 text-lg mb-6 text-center leading-relaxed">
           “CODE RUSH” event is to test students on their problem solving skills and their skills in working as a team and their approach to the problem and understanding. 
-<br/><br/><p className="font-bold text-xl">Round 1 :</p> <br/>Code in constraints 
+<br/><br/><p className="font-bold text-xl">Round 1 :</p> <br/>Code in Constraints :
 Teams will be given a problem statement and be asked to code with a set of constraints by facing challenges which will be given in between the development of the code. <br/><br/>
-<p className="font-bold text-xl">Round 2 :</p> <br/>Code exchange challenge 
+<p className="font-bold text-xl">Round 2 :</p> <br/>Code Exchange Challenge :
 Teams will be given a new problem statement where they have to develop half of the code and we will swap the codes , so teams has to look on to others code (different problem statement) and continue the code to complete . This will enhance the code understanding ability of the participant. 
 
           </p>
