@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, useMotionValue, useTransform, useScroll, AnimatePresence } from 'framer-motion';
 import { Camera } from 'lucide-react';
 import cseaLogo from '../assets/CSEAlogo.png';
-import PSGLogo from '../assets/PSG Logo.png'
+import PSGLogo from '../assets/PSG logo.png'
 
 
 
@@ -108,30 +108,34 @@ const AnimatedCard = ({ title, description, buttonText }) => {
 const Header = () => {
   return (
     <motion.header 
-      className="w-full flex items-center justify-between px-8 py-4 bg-gradient-to-r from-blue-1000 to-purple-600 backdrop-blur-md fixed top-0 z-20 shadow-lg"
+      className="w-full flex flex-col md:flex-row items-center justify-between px-4 py-2 bg-gradient-to-r from-blue-1000 to-purple-600 backdrop-blur-md fixed top-0 z-20 shadow-lg"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <div className="flex items-center space-x-4">
-      <img src={PSGLogo} alt="PSG Logo" className="w-18 h-20" />
-      <img src={cseaLogo} alt="CSEA Logo" className="w-16 h-17" />
-
-        <h1 className="text-2xl font-semibold text-white">
+      <div className="flex items-center space-x-2 md:space-x-4">
+        <img src={PSGLogo} alt="PSG Logo" className="w-12 h-auto md:w-20 md:h-auto" />
+        <img src={cseaLogo} alt="CSEA Logo" className="w-12 h-auto md:w-16 md:h-17" />
+        <h1 className="text-lg md:text-2xl font-semibold text-white text-center md:text-left">
           Computer Science and Engineering Association - PSG College of Technology
         </h1>
       </div>
-      <nav className="text-white">
-        <ul className="flex space-x-8">
-          <li className="hover:text-blue-300 transition">Home</li>
-          <li className="hover:text-blue-300 transition">About</li>
-          <li className="hover:text-blue-300 transition"><a href ="/events/CodeRush/register">Events</a></li>
-          <li className="hover:text-blue-300 transition">Contact</li>
+      <nav className="text-white mt-2 md:mt-0">
+        <ul className="flex flex-wrap items-center justify-center space-x-6">
+          <li className="hover:text-blue-300 transition font-bold"><a href="/">Home</a></li>
+          <li className="hover:text-blue-300 transition font-bold">About</li>
+          <li className="hover:text-blue-300 transition font-bold">
+            <a href="/events/CodeRush/register">Events</a>
+          </li>
+          <li className="hover:text-blue-300 transition font-bold">Contact</li>
         </ul>
       </nav>
     </motion.header>
   );
 };
+
+
+
 
 const HomePage = () => {
   const { scrollYProgress } = useScroll();
@@ -215,9 +219,9 @@ const HomePage = () => {
           </h2>
           <p className="text-gray-200 text-lg mb-6 text-center leading-relaxed">
           “CODE RUSH” event is to test students on their problem solving skills and their skills in working as a team and their approach to the problem and understanding. 
-<br/><br/>Round 1 : Code in constraints 
+<br/><br/><p className="font-bold text-xl">Round 1 :</p> <br/>Code in constraints 
 Teams will be given a problem statement and be asked to code with a set of constraints by facing challenges which will be given in between the development of the code. <br/><br/>
-Round 2 : Code exchange challenge 
+<p className="font-bold text-xl">Round 2 :</p> <br/>Code exchange challenge 
 Teams will be given a new problem statement where they have to develop half of the code and we will swap the codes , so teams has to look on to others code (different problem statement) and continue the code to complete . This will enhance the code understanding ability of the participant. 
 
           </p>
