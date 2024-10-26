@@ -2,7 +2,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './components/homrPage'; // Adjust the path based on your file structure
-import RegistrationForm from './components/RegistrationForm'; // Assuming you have this component
+import RegistrationForm from './components/RegistrationForm';
+// In your index.js or App.js
+import './index.css';
+ // Assuming you have this component
 
 const App = () => {
     return (
