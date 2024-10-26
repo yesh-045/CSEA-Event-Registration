@@ -76,7 +76,7 @@ const handleSubmit = async (e) => {
   setIsSubmitting(true);
 
   try {
-    const response = await axios.post('http://localhost:5000/register', {
+    const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
       teamName,
       teamMembers,
     });
@@ -167,28 +167,33 @@ const removeTeamMember = (index) => {
     />
   </Grid>
   <Grid item xs={12} sm={6}>
-    <TextField
-      fullWidth
-      label="Phone Number"
-      value={member.phone}
-      onChange={(e) => {
-        const updated = [...teamMembers];
-        const phonePattern = /^[0-9]{10}$/;
-        if (phonePattern.test(e.target.value)) {
-          updated[index].phone = e.target.value;
-        }
-        setTeamMembers(updated);
-      }}
-      required
-      InputProps={{
-        startAdornment: <PhoneIcon sx={{ mr: 1, color: 'text.secondary' }} />
-      }}
-      inputProps={{
-        pattern: "^[0-9]{10}$",
-        title: "Please enter a valid 10-digit phone number"
-      }}
-    />
-  </Grid>
+  <TextField
+    fullWidth
+    label="Phone Number"
+    value={member.phone}
+    onChange={(e) => {
+      const updated = [...teamMembers];
+      updated[index].phone = e.target.value;
+      setTeamMembers(updated);
+    }}
+    error={!!member.phone && !/^[0-9]{10}$/.test(member.phone)}
+    helperText={
+      member.phone && !/^[0-9]{10}$/.test(member.phone)
+        ? "Please enter a valid 10-digit phone number"
+        : ""
+    }
+    required
+    InputProps={{
+      startAdornment: <PhoneIcon sx={{ mr: 1, color: 'text.secondary' }} />
+    }}
+    inputProps={{
+      pattern: "^[0-9]{10}$",
+      title: "Please enter a valid 10-digit phone number"
+    }}
+  />
+</Grid>
+
+
 
   <Grid item xs={12} sm={4}>
     <TextField
@@ -226,26 +231,29 @@ const removeTeamMember = (index) => {
     />
   </Grid>
   <Grid item xs={12} sm={4}>
-    <TextField
-      fullWidth
-      label="Roll NO"
-      value={member.roll_no}
-      onChange={(e) => {
-        const updated = [...teamMembers];
-        const rollPattern = /^[0-9]{2}[A-Z]{1}[0-9]{3}$/;
-        if (rollPattern.test(e.target.value)) {
-          updated[index].roll_no = e.target.value;
-        }
-        setTeamMembers(updated);
-      }}
-      placeholder="e.g., 23N244"
-      required
-      inputProps={{
-        pattern: "^[0-9]{2}[A-Z]{1}[0-9]{3}$",
-        title: "Please enter a valid roll number (e.g., 23N244)"
-      }}
-    />
-  </Grid>
+  <TextField
+    fullWidth
+    label="Roll NO"
+    value={member.roll_no}
+    onChange={(e) => {
+      const updated = [...teamMembers];
+      updated[index].roll_no = e.target.value;
+      setTeamMembers(updated);
+    }}
+    error={!!member.roll_no && !/^[0-9]{2}[A-Z]{1}[0-9]{3}$/.test(member.roll_no)}
+    helperText={
+      member.roll_no && !/^[0-9]{2}[A-Z]{1}[0-9]{3}$/.test(member.roll_no)
+        ? "Please enter a valid roll number (e.g., 23N244)"
+        : ""
+    }
+    placeholder="e.g., 23N244"
+    required
+    inputProps={{
+      pattern: "^[0-9]{2}[A-Z]{1}[0-9]{3}$",
+      title: "Please enter a valid roll number (e.g., 23N244)"
+    }}
+  />
+</Grid>
 </Grid>
 
               {index > 1 && (
