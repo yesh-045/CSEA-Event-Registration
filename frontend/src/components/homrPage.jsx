@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useTransform, useScroll, AnimatePresence } from 'framer-motion';
-import { Camera } from 'lucide-react';
+import { motion, useTransform, useScroll } from 'framer-motion';
+import { FaBolt } from 'react-icons/fa';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import cseaLogo from '../assets/CSEAlogo.png';
 import PSGLogo from '../assets/PSG Logo.png';
+import eventLogo from '../assets/Black_Yellow_Bold_Minimalist_Technology_Expo_Event_Poster-removebg-preview.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Header Component
+// Header 
 const Header = ({ scrollDirection, hasReachedRegister }) => (
   <motion.header 
     className="w-full flex flex-col md:flex-row items-center justify-between px-4 py-2 bg-gradient-to-r from-red-900 to-amber-800 backdrop-blur-md fixed top-0 z-20 shadow-lg"
@@ -40,30 +41,36 @@ const AboutSection = () => {
     const text = textRef.current;
     const title = titleRef.current;
 
-    gsap.from(title, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1
-      },
-      y: 100,
-      opacity: 0,
-      duration: 1
-    });
+    gsap.fromTo(title, 
+      { y: 100, opacity: 0 }, 
+      {
+        scrollTrigger: {
+          trigger: section,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        duration: 1
+      }
+    );
 
-    gsap.from(text.children, {
-      scrollTrigger: {
-        trigger: section,
-        start: "top center",
-        end: "bottom center",
-        scrub: 1
-      },
-      y: 50,
-      opacity: 0,
-      duration: 0.8,
-      stagger: 0.2
-    });
+    gsap.fromTo(text.children, 
+      { y: 50, opacity: 0 }, 
+      {
+        scrollTrigger: {
+          trigger: section,
+          start: "top center",
+          end: "bottom center",
+          scrub: 1
+        },
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.2
+      }
+    );
   }, []);
 
   return (
@@ -133,8 +140,6 @@ const HomePage = () => {
             setScrollDirection('up');
           }
           lastScrollY.current = scrollY.get();
-        } else {
-          setHasReachedRegister(false);
         }
       }
     };
@@ -144,6 +149,31 @@ const HomePage = () => {
   }, [scrollY]);
 
   const y = useTransform(scrollY, [0, 0.2], scrollDirection === 'down' ? [0, -50] : [0, 50]);
+
+  useEffect(() => {
+    const text = document.querySelector('.hero-text');
+    const chars = text.textContent.split('');
+    text.textContent = '';
+    chars.forEach(char => {
+      const span = document.createElement('span');
+      span.textContent = char;
+      span.style.display = 'inline-block';
+      text.appendChild(span);
+    });
+
+    gsap.fromTo(text.children, 
+      { opacity: 0 }, 
+      {
+        opacity: 1,
+        duration: 0.05,
+        ease: 'power3.out',
+        stagger: {
+          amount: 2,
+          from: 'start'
+        }
+      }
+    );
+  }, []);
 
   return (
     <div className="min-h-screen relative pt-24">
@@ -169,30 +199,23 @@ const HomePage = () => {
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-4"
         style={{ y }}
       >
-        <motion.h1 
-          className="text-7xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-400 mb-6"
-          animate={{ 
-            backgroundPosition: ['0%', '100%', '0%'],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          style={{
-            backgroundSize: '200% auto',
-          }}
-        >
-          CodeRush 2024
-        </motion.h1>
-        
-        <motion.p 
-          className="text-xl md:text-2xl text-amber-100 mb-8 max-w-2xl"
+        <motion.img 
+          src={eventLogo}
+          alt="Event Logo"
+          className="w-full max-w-2xl mb-6"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
+        />
+        
+        <motion.p 
+          className="hero-text text-xl md:text-2xl text-amber-100 mb-8 max-w-2xl"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          style={{ fontFamily: 'monospace', textShadow: '0 0 10px rgba(0, 255, 0, 0.7)' }}
         >
-          THINK FAST, CODE SMART, CONQUER THE CHALLENGE!!!
+          Race   Time, Code    Clean, Seize    the    Win!
         </motion.p>
         
         <motion.button
