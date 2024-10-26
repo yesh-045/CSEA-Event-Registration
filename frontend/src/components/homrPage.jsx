@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useTransform, useScroll } from 'framer-motion';
 import { FaBolt } from 'react-icons/fa';
+import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import cseaLogo from '../assets/CSEAlogo.png';
@@ -31,7 +32,7 @@ const Header = ({ scrollDirection, hasReachedRegister }) => (
   </motion.header>
 );
 
-const AboutSection = () => {
+const AboutSection = ({ registerButtonRef2 }) => {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const titleRef = useRef(null);
@@ -110,6 +111,25 @@ const AboutSection = () => {
               A collaborative coding experience where teams develop partial solutions before exchanging and completing each other's code.
             </p>
           </div>
+
+          <motion.button
+            ref={registerButtonRef2}
+            className="group relative bg-gradient-to-r from-amber-500 to-red-500 text-white px-10 py-4 rounded-full text-lg font-semibold overflow-hidden mt-8 mx-auto block"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <a href="/events/CodeRush/register" className="relative z-10">Register Now</a>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-red-600 to-amber-600"
+              initial={{ x: '100%' }}
+              whileHover={{ x: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{ filter: 'contrast(1.5) saturate(1.2)' }}
+            />
+          </motion.button>
           
           <p className="text-amber-100 text-lg text-center leading-relaxed mt-8">
             Form your team of 2-3 members and prepare to showcase your programming prowess in this ultimate coding challenge!
@@ -126,13 +146,16 @@ const HomePage = () => {
   const [hasReachedRegister, setHasReachedRegister] = useState(false);
   const lastScrollY = useRef(0);
   const registerButtonRef = useRef(null);
+  const registerButtonRef2 = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const registerButton = registerButtonRef.current;
-      if (registerButton) {
-        const rect = registerButton.getBoundingClientRect();
-        if (rect.top <= window.innerHeight) {
+      const registerButton2 = registerButtonRef2.current;
+      if (registerButton || registerButton2) {
+        const rect = registerButton?.getBoundingClientRect();
+        const rect2 = registerButton2?.getBoundingClientRect();
+        if ((rect && rect.top <= window.innerHeight) || (rect2 && rect2.top <= window.innerHeight)) {
           setHasReachedRegister(true);
           if (scrollY.get() > lastScrollY.current) {
             setScrollDirection('down');
@@ -206,6 +229,7 @@ const HomePage = () => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
+          style={{ filter: 'contrast(1.5) saturate(1.2)' }}
         />
         
         <motion.p 
@@ -213,7 +237,11 @@ const HomePage = () => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
-          style={{ fontFamily: 'monospace', textShadow: '0 0 10px rgba(0, 255, 0, 0.7)' }}
+          style={{ 
+            fontFamily: 'monospace', 
+            textShadow: '0 0 10px rgba(0, 255, 0, 0.7)',
+            filter: 'contrast(1.5) saturate(1.2)'
+          }}
         >
           Race   Time, Code    Clean, Seize    the    Win!
         </motion.p>
@@ -233,11 +261,12 @@ const HomePage = () => {
             initial={{ x: '100%' }}
             whileHover={{ x: 0 }}
             transition={{ duration: 0.3 }}
+            style={{ filter: 'contrast(1.5) saturate(1.2)' }}
           />
         </motion.button>
       </motion.div>
 
-      <AboutSection />
+      <AboutSection registerButtonRef2={registerButtonRef2} />
 
       <motion.footer 
         className="py-8 text-center text-amber-200/60 border-t border-amber-500/10 backdrop-blur-md"
@@ -245,6 +274,19 @@ const HomePage = () => {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
       >
+        <div className="flex flex-col md:flex-row items-center justify-between px-4 py-2">
+          <div className="flex items-center space-x-2 md:space-x-4">
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-amber-300 transition">
+              <FaInstagram size={24} />
+            </a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-amber-300 transition">
+              <FaLinkedin size={24} />
+            </a>
+          </div>
+          <div className="text-amber-100 mt-2 md:mt-0">
+            <p>Contact: +1 234 567 890</p>
+          </div>
+        </div>
         <p>© 2024 Computer Science Engineering Association, PSG Tech. All rights reserved.</p>
       </motion.footer>
     </div>
