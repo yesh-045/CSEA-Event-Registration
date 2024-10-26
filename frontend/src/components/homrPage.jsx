@@ -421,7 +421,9 @@ const HomePage = () => {
             </a>
           </div>
           <div className="text-amber-100 mt-2 md:mt-0">
-            <p>Contact: +1 234 567 890</p>
+            <p>Contact:Contact details <br />
+ArulKumara B R - 86102 02823 <br />
+Sanjay J - 97897 10033</p>
           </div>
         </div>
         <p>© 2024 Computer Science Engineering Association, PSG Tech. All rights reserved.</p>
