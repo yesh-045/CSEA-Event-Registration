@@ -1,8 +1,8 @@
 import CodeRush from "../../../models/codeRush/codeRushSchema.js";
 
-const codeRushController = 
+const codeRushController =
 {
-    postTeam : async (req, res) => 
+    postTeam : async (req, res) =>
     {
         const { teamName, teamMembers } = req.body;
         if(!teamMembers || teamMembers.length < 1)

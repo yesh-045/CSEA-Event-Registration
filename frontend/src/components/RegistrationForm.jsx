@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import LOGO from '../assets/Black Yellow Bold Minimalist Technology Expo Event Poster.png';
 import {
   Container,
@@ -56,7 +57,9 @@ const CodeRushRegistration = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
-  
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
   const handleNext = () => {
     setActiveStep((prevStep) => prevStep + 1);
   };
@@ -68,9 +71,27 @@ const CodeRushRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    setShowSuccess(true);
-    setIsSubmitting(false);
+
+    try {
+      const response = await axios.post('http://localhost:5000/register', {
+        teamName,
+        teamMembers,
+      });
+
+      if (response.status === 201) {
+        setSuccessMessage('Registration successful!');
+        setErrorMessage('');
+        setShowSuccess(true)
+      }
+    } catch (error) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage('An error occurred. Please try again later.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleDialogClose = () => {
@@ -107,8 +128,8 @@ const CodeRushRegistration = () => {
 
             {teamMembers.map((member, index) => (
               <Fade in timeout={500} key={index}>
-                <Card 
-                  sx={{ 
+                <Card
+                  sx={{
                     mt: 3,
                     border: '1px solid',
                     borderColor: 'divider',
@@ -155,7 +176,7 @@ const CodeRushRegistration = () => {
                           }}
                         />
                       </Grid>
-                      
+
                       <Grid item xs={12} md={4}>
                         <TextField
                           fullWidth
@@ -257,11 +278,11 @@ const CodeRushRegistration = () => {
               <CheckCircleIcon sx={{ mr: 2, color: theme.palette.primary.main }} />
               Review Your Details
             </Typography>
-            
+
             <Typography variant="h6" gutterBottom color="primary">
               Team Name: {teamName}
             </Typography>
-            
+
             <List>
               {teamMembers.map((member, index) => (
                 <React.Fragment key={index}>
@@ -271,36 +292,36 @@ const CodeRushRegistration = () => {
                     </Typography>
                     <Grid container spacing={2}>
                       <Grid item xs={12} sm={6}>
-                        <ListItemText 
-                          primary="Name" 
+                        <ListItemText
+                          primary="Name"
                           secondary={member.studentName}
                           sx={{ '& .MuiListItemText-primary': { color: 'text.secondary' } }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={6}>
-                        <ListItemText 
-                          primary="Phone" 
+                        <ListItemText
+                          primary="Phone"
                           secondary={member.phone}
                           sx={{ '& .MuiListItemText-primary': { color: 'text.secondary' } }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                        <ListItemText 
-                          primary="Department" 
+                        <ListItemText
+                          primary="Department"
                           secondary={member.department}
                           sx={{ '& .MuiListItemText-primary': { color: 'text.secondary' } }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                        <ListItemText 
-                          primary="Year" 
+                        <ListItemText
+                          primary="Year"
                           secondary={member.yearOfStudy}
                           sx={{ '& .MuiListItemText-primary': { color: 'text.secondary' } }}
                         />
                       </Grid>
                       <Grid item xs={12} sm={4}>
-                        <ListItemText 
-                          primary="Roll No" 
+                        <ListItemText
+                          primary="Roll No"
                           secondary={member.roll_no}
                           sx={{ '& .MuiListItemText-primary': { color: 'text.secondary' } }}
                         />
@@ -322,8 +343,8 @@ const CodeRushRegistration = () => {
     <Container maxWidth="lg" sx={{ py: 6 }}>
       <Fade in timeout={1000}>
         <Box>
-          <Box 
-            textAlign="center" 
+          <Box
+            textAlign="center"
             mb={6}
             sx={{
               background: 'white',
@@ -332,7 +353,7 @@ const CodeRushRegistration = () => {
               boxShadow: '0 4px 6px rgba(0,0,0,0.07)'
             }}
           >
-            <Box 
+            <Box
               component="img"
               src={LOGO}
               alt="Event Logo"
@@ -342,7 +363,7 @@ const CodeRushRegistration = () => {
                 mb: 2
               }}
             />
-            
+
             <Chip
               icon={<EmojiEventsIcon />}
               label="₹6000 Prize Pool"
@@ -356,9 +377,9 @@ const CodeRushRegistration = () => {
             />
           </Box>
 
-          <Paper 
-            elevation={0} 
-            sx={{ 
+          <Paper
+            elevation={0}
+            sx={{
               p: 4,
               borderRadius: '16px',
               bgcolor: 'background.paper',
@@ -392,7 +413,7 @@ const CodeRushRegistration = () => {
                     <Button
                       variant="contained"
                       onClick={handleNext}
-                      disabled={!teamName || teamMembers.some(member => 
+                      disabled={!teamName || teamMembers.some(member =>
                         !member.studentName || !member.department || !member.yearOfStudy || !member.phone || !member.roll_no
                       )}
                     >
@@ -423,12 +444,12 @@ const CodeRushRegistration = () => {
                     </Button>
                   </Box>
                   {isSubmitting && (
-                    <LinearProgress 
-                      sx={{ 
+                    <LinearProgress
+                      sx={{
                         mt: 2,
                         borderRadius: 1,
                         height: 8
-                      }} 
+                      }}
                     />
                   )}
                 </Box>
@@ -436,8 +457,8 @@ const CodeRushRegistration = () => {
             </Box>
           </Paper>
 
-          <Dialog 
-            open={showSuccess} 
+          <Dialog
+            open={showSuccess}
             onClose={handleDialogClose}
             TransitionComponent={Fade}
             transitionDuration={400}
@@ -450,15 +471,15 @@ const CodeRushRegistration = () => {
             </DialogTitle>
             <DialogContent>
               <Typography align="center" color="text.secondary">
-                Your team has been registered successfully. 
+                Your team has been registered successfully.
                 Get ready to showcase your coding prowess and compete for glory!
               </Typography>
               <Typography align="center" color="text.secondary" sx={{ mt: 2 }}>
                 <b>Make sure to join the Whatsapp group for further updates.</b>
                 <br/>
-                <a 
-                  href="https://chat.whatsapp.com/L8n6N6YQjUkF7dlrO2LVxi" 
-                  target="_blank" 
+                <a
+                  href="https://chat.whatsapp.com/L8n6N6YQjUkF7dlrO2LVxi"
+                  target="_blank"
                   rel="noreferrer"
                   style={{
                     color: theme.palette.primary.main,
@@ -473,7 +494,7 @@ const CodeRushRegistration = () => {
             <DialogActions>
               <Button onClick={handleDialogClose} variant="contained" fullWidth>
                 Close
-              </Button> 
+              </Button>
             </DialogActions>
           </Dialog>
         </Box>
