@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useTransform, useScroll } from 'framer-motion';
-import { FaBolt } from 'react-icons/fa';
+// Removed unused import FaBolt
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -167,7 +167,7 @@ const HomePage = () => {
       }
     };
 
-    const unsubscribe = scrollY.onChange(handleScroll);
+    const unsubscribe = scrollY.onChange(() => handleScroll());
     return () => unsubscribe();
   }, [scrollY]);
 
