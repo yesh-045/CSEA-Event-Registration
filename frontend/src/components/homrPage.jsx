@@ -8,6 +8,7 @@ import cseaLogo from '../assets/CSEAlogo.png';
 import PSGLogo from '../assets/PSG Logo.png';
 import eventLogo from '../assets/Black_Yellow_Bold_Minimalist_Technology_Expo_Event_Poster-removebg-preview.png';
 
+
 gsap.registerPlugin(ScrollTrigger);
 
 // Header 
@@ -25,8 +26,8 @@ const Header = ({ scrollDirection, hasReachedRegister }) => (
     <nav className="text-amber-100 mt-2 md:mt-0">
       <ul className="flex flex-wrap items-center justify-center space-x-4">
         <li className="hover:text-amber-300 transition font-bold"><a href="/">Home</a></li>
-        <li className="hover:text-amber-300 transition font-bold">About</li>
-        <li className="hover:text-amber-300 transition font-bold">Contact</li>
+        <li className="hover:text-amber-300 transition font-bold"><a href="#footer">About</a></li>
+        <li className="hover:text-amber-300 transition font-bold"><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </motion.header>
@@ -219,6 +220,7 @@ const HomePage = () => {
 
       {/* Hero Section */}
       <motion.div 
+        id="hero"
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-4"
         style={{ y }}
       >
@@ -269,6 +271,7 @@ const HomePage = () => {
       <AboutSection registerButtonRef2={registerButtonRef2} />
 
       <motion.footer 
+        id="footer"
         className="py-8 text-center text-amber-200/60 border-t border-amber-500/10 backdrop-blur-md"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
