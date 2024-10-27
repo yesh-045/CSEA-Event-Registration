@@ -5,7 +5,7 @@ import { Trophy, Users, Zap, Brain, Star, Code,  Target } from 'lucide-react';
 import PSGLogo from '../assets/PSG Logo.png';
 import cseaLogo from '../assets/CSEAlogo.png';
 import eventLogo from '../assets/Black_Yellow_Bold_Minimalist_Technology_Expo_Event_Poster-removebg-preview.png';
-import gsap from 'gsap'; 
+import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { FaInstagram, FaLinkedin } from 'react-icons/fa';
 
@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Header = ({ scrollDirection, hasReachedRegister }) => (
-  <motion.header 
+  <motion.header
     className="w-full flex flex-col md:flex-row items-center justify-between px-6 py-3 bg-gradient-to-r from-red-900/90 to-amber-800/90 backdrop-blur-md fixed top-0 z-20 shadow-lg"
     initial={{ y: 0 }}
     animate={{ y: hasReachedRegister && scrollDirection === 'down' ? -100 : 0 }}
@@ -46,10 +46,10 @@ const HeroSection = ({ y, registerButtonRef }) => {
     });
 
     const tl = gsap.timeline();
-    tl.fromTo(text.children, 
+    tl.fromTo(text.children,
       { opacity: 0, y: 20 },
-      { 
-        opacity: 1, 
+      {
+        opacity: 1,
         y: 0,
         duration: 0.05,
         stagger: 0.03,
@@ -59,11 +59,11 @@ const HeroSection = ({ y, registerButtonRef }) => {
   }, []);
 
   return (
-    <motion.div 
+    <motion.div
       className="relative min-h-screen flex flex-col items-center justify-center text-center px-4"
       style={{ y }}
     >
-      <motion.img 
+      <motion.img
         src={eventLogo}
         alt="Event Logo"
         className="w-full max-w-2xl mb-8"
@@ -72,31 +72,31 @@ const HeroSection = ({ y, registerButtonRef }) => {
         transition={{ delay: 0.3 }}
         style={{ filter: 'contrast(1.2) brightness(1.1)' }}
       />
-      
-      <motion.p 
+
+      <motion.p
           className="hero-text text-base md:text-xl text-amber-100 mb-8 max-w-2xl"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
-          style={{ 
-            fontFamily: 'monospace', 
+          style={{
+            fontFamily: 'monospace',
             textShadow: '0 0 10px rgba(0, 255, 0, 0.7)',
             filter: 'contrast(1.5) saturate(1.2)'
           }}
         >
           Race   Time, Code    Clean, Seize    the    Win!
         </motion.p>
-      
+
       <motion.button
         ref={registerButtonRef}
-        className="group relative bg-gradient-to-r from-amber-500 to-red-500 text-white px-12 py-5 rounded-full text-xl font-semibold overflow-hidden"
+        className="group relative bg-gradient-to-r from-amber-500 to-red-500 text-white px-8 py-3 md:px-12 md:py-5 rounded-full text-lg md:text-xl font-semibold overflow-hidden"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.6 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <a href="/events/CodeRush/register" className="relative z-10">Register Now </a>
+        <a href="#about" className="relative z-10">More About Code Rush</a>
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-red-600 to-amber-600"
           initial={{ x: '100%' }}
@@ -154,9 +154,9 @@ const AboutSection = ({ registerButtonRef2 }) => {
               CODE RUSH 2024
             </h2>
           </div>
-          
+
           <p className="text-amber-100 text-xl text-center leading-relaxed mb-8">
-            Step into an arena where coding meets creativity, and challenges push your limits. 
+            Step into an arena where coding meets creativity, and challenges push your limits.
             CODE RUSH isn't just a competition—it's your gateway to proving your programming prowess!
           </p>
 
@@ -190,9 +190,9 @@ const AboutSection = ({ registerButtonRef2 }) => {
               Round 1: Code in Constraints
             </h3>
           </div>
-          
+
           <p className="text-amber-100 text-base md:text-lg text-center leading-relaxed mb-6 md:mb-8">
-            Navigate through a maze of constraints where every line of code counts! 
+            Navigate through a maze of constraints where every line of code counts!
             Adapt to evolving requirements while maintaining perfect precision.
           </p>
 
@@ -248,7 +248,7 @@ const AboutSection = ({ registerButtonRef2 }) => {
           </div>
 
           <p className="text-amber-100 text-base md:text-lg text-center leading-relaxed mb-6 md:mb-8">
-            Enter the ultimate collaborative battlefield! Create, exchange, and evolve code 
+            Enter the ultimate collaborative battlefield! Create, exchange, and evolve code
             in a dynamic environment where teamwork meets technical excellence.
           </p>
 
@@ -292,7 +292,7 @@ const AboutSection = ({ registerButtonRef2 }) => {
 
         <div className="flex justify-center">
           <motion.button
-            className="group relative bg-gradient-to-r from-amber-500 to-red-500 text-white px-12 py-5 rounded-full text-xl font-semibold overflow-hidden"
+            className="group relative bg-gradient-to-r from-amber-500 to-red-500 text-white px-8 py-3 md:px-12 md:py-5 rounded-full text-lg md:text-xl font-semibold overflow-hidden"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.6 }}
@@ -357,8 +357,8 @@ const HomePage = () => {
         text.appendChild(span);
       });
 
-      gsap.fromTo(text.children, 
-        { opacity: 0 }, 
+      gsap.fromTo(text.children,
+        { opacity: 0 },
         {
           opacity: 1,
           duration: 0.05,
@@ -391,7 +391,7 @@ const HomePage = () => {
       </div>
 
       {/* Main Content */}
-      <motion.div 
+      <motion.div
         id="hero"
         className="relative min-h-screen flex flex-col items-center justify-center text-center px-4"
         style={{ y }}
@@ -400,11 +400,11 @@ const HomePage = () => {
       </motion.div>
 
       <AboutSection registerButtonRef2={registerButtonRef2} />
-      
-      
+
+
 
       {/* Footer */}
-      <motion.footer 
+      <motion.footer
         id="footer"
         className="py-8 text-center text-amber-200/60 border-t border-amber-500/10 backdrop-blur-md"
         initial={{ opacity: 0 }}
@@ -420,11 +420,13 @@ const HomePage = () => {
               <FaLinkedin size={24} />
             </a>
           </div>
+          <section id='contact'>
           <div className="text-amber-100 mt-2 md:mt-0">
             <p>Contact details: <br />
 ArulKumara B R - 86102 02823 <br />
 Sanjay J - 97897 10033</p>
           </div>
+          </section>
         </div>
         <p>© 2024 Computer Science Engineering Association, PSG Tech. All rights reserved.</p>
       </motion.footer>
