@@ -3,3 +3,5 @@
 /frontend/.env
 
 .vercel
+/exported_data
+/backend/mongo2excel.py
